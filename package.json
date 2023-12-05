@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "day2": "vite-node day-two/day-two.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
