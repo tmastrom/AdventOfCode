@@ -18,7 +18,6 @@ export async function partOne(filepath: string) {
   const numsObj = new Object()
 
   fileArray.forEach((line, index) => {
-    console.log(line)
     let numStart = 0
     const nums = {}
     const symbols: Array<number> = []

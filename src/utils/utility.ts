@@ -11,3 +11,7 @@ export const arrayRange = (start: number, stop: number, step: number) =>
     { length: (stop - start) / step + 1 },
     (value, index) => start + index * step,
   )
+
+export const sumArray = (arr: Array<number>) => {
+  return arr.reduce((a, b) => a + b, 0)
+}

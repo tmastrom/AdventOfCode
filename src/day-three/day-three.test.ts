@@ -14,7 +14,6 @@ describe('day-three', () => {
     const result = await partOne(
       '/Users/mastro/code/advent-of-code/src/day-three/input.txt',
     )
-
-    console.log('result', result)
+    // console.log('result', result)
   })
 })
