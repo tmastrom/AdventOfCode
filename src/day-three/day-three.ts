@@ -18,6 +18,7 @@ export async function partOne(filepath: string) {
   const numsObj = new Object()
 
   fileArray.forEach((line, index) => {
+    console.log(line)
     let numStart = 0
     const nums = {}
     const symbols: Array<number> = []
@@ -40,7 +41,6 @@ export async function partOne(filepath: string) {
         }
       }
     })
-
     numsObj[index] = { nums: nums, symbols: symbols }
   })
 
@@ -53,7 +53,7 @@ export async function partOne(filepath: string) {
     const length = numString.length
 
     // get the indices of the window
-    const windowRange = arrayRange(numberIndex - 1, numberIndex + length + 1, 1)
+    const windowRange = arrayRange(numberIndex - 1, numberIndex + length, 1)
 
     // get symbols for the current line + above and below
     const symbolsAbove = numsObj[lineIndex - 1]?.symbols || []
@@ -77,7 +77,6 @@ export async function partOne(filepath: string) {
     Object.keys(nums).forEach((numIndex) => {
       const num = nums[numIndex]
       const inWindow = getWindow(parseInt(id), parseInt(numIndex), num)
-
       if (inWindow) {
         ans += parseInt(num)
       }

@@ -10,11 +10,11 @@ describe('day-three', () => {
     expect(result).toBe(4361)
   })
 
-  test('part-one test input', async () => {
+  test('run part-one', async () => {
     const result = await partOne(
       '/Users/mastro/code/advent-of-code/src/day-three/input.txt',
     )
 
-    console.log('result', result )
+    console.log('result', result)
   })
 })
