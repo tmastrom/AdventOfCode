@@ -26,11 +26,9 @@ describe('day-four', () => {
 
     const exampleAnswer = [1, 2, 4, 8, 14, 1]
     expect(sumArray(exampleAnswer)).toBe(30)
-
     expect(result).toEqual(exampleAnswer)
 
     const ans = sumArray(result)
-
     expect(ans).toBe(30)
   })
 

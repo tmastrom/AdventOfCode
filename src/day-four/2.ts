@@ -40,13 +40,13 @@ export async function partTwo(filepath: string) {
     const range = arrayRange(index + 1, index + win, 1)
 
     range.forEach((r) => {
-      console.log(
-        `card ${index} has ${win} matching cards, so you win ${cardCount[index]} copy of ${range}`,
-      )
+      // console.log(
+      //   `card ${index} has ${win} matching cards, so you win ${cardCount[index]} copy of ${range}`,
+      // )
       cardCount[r] = cardCount[r] + cardCount[index]
     })
 
-    console.log('card count', cardCount)
+    // console.log('card count', cardCount)
   })
 
   return cardCount

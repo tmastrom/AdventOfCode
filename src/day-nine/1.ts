@@ -1,56 +1,69 @@
-import { readLines } from '../utils/readlines'
-import { sumArray } from '../utils/utility'
+export function solve(inputLines: string[]) {
+  const diffsPyramids = inputLines
+    .map((line) =>
+      line
+        .trim()
+        .split(' ')
+        .map((n) => parseInt(n, 10)),
+    )
+    .map(getDiffsPyramid)
 
-function getDifference(arr: Array<number>) {
-  const diff: Array<number> = []
-  arr.map((val, index) => {
-    if (arr[index + 1]) diff.push(arr[index + 1] - arr[index])
-  })
-  return diff
+  const nextValues = diffsPyramids.map((pyramid) => extrapolate(pyramid))
+  const prevValues = diffsPyramids.map((pyramid) => extrapolate(pyramid, true))
+
+  const sum = (arr: number[]) => arr.reduce((a, b) => a + b)
+
+  return {
+    part1: sum(nextValues),
+    part2: sum(prevValues),
+  }
 }
 
-function allZero(arr: Array<number>) {
-  let isAllZero: boolean = true
-  arr.forEach((val) => {
-    if (val !== 0) {
-      isAllZero = false
-    }
-  })
-  return isAllZero
+function getDiffsPyramid(history: number[]) {
+  const diffsPyramid: number[][] = [history]
+
+  while (diffsPyramid[diffsPyramid.length - 1].some((n) => n !== 0)) {
+    diffsPyramid.push(getDiffs(diffsPyramid[diffsPyramid.length - 1]))
+  }
+
+  return diffsPyramid
 }
 
-export async function partOne(filepath: string) {
-  const file = await readLines(filepath)
-  const fileArray = (await file) as Array<string>
+function getDiffs(nums: number[]) {
+  const diffs: number[] = []
+  for (let i = 1; i < nums.length; i++) {
+    diffs.push(nums[i] - nums[i - 1])
+  }
+  return diffs
+}
 
-  const predictions: Array<number> = []
+function extrapolate(diffsPyramid: number[][], isBackwards: boolean = false) {
+  const newPyramid = clone(diffsPyramid)
 
-  fileArray.forEach((line, index) => {
-    //start by making a new sequence from the difference at each step of your history
-    const arr = line.split(' ').map((val) => parseInt(val))
-    const data: Array<Array<number>> = [arr]
-    for (let i = 1; i < arr.length; i++) {
-      data[i] = getDifference(data[i - 1])
-      if (allZero(data[i])) {
-        break
-      }
+  const addVal = <T>(arr: T[], val: T) =>
+    arr[isBackwards ? 'unshift' : 'push'](val)
+
+  const getVal = <T>(arr: T[]) => (isBackwards ? arr[0] : arr[arr.length - 1])
+
+  for (let level = newPyramid.length - 1; level >= 0; level--) {
+    const currentLevel = newPyramid[level]
+    const nextLevel = newPyramid[level + 1]
+
+    if (nextLevel === undefined) {
+      addVal(currentLevel, 0)
+    } else {
+      const val = getVal(currentLevel)
+      const nextLevelVal = getVal(nextLevel)
+      addVal(
+        currentLevel,
+        isBackwards ? val - nextLevelVal : val + nextLevelVal,
+      )
     }
+  }
 
-    for (let i = data.length - 1; i > 0; i--) {
-      // To extrapolate, start by adding a new zero to the end of your list of zeroes;
-      if (allZero(data[i])) {
-        data[i].push(0)
-      }
-      // get the last element in the sequence of the current row
-      const last = data[i][data[i].length - 1]
-      // add it to the last element in the sequence of the previous row and append to the previous row
-      const prev = data[i - 1].pop() || 0
+  return getVal(newPyramid[0])
+}
 
-      data[i-1].push(prev)
-      data[i-1].push(prev + last)
-    }
-    predictions.push(data[0][data[0].length - 1])
-  })
-  console.log('predictions', predictions)
-  return sumArray(predictions)
+function clone(pyramid: number[][]) {
+  return pyramid.map((n) => [...n])
 }
