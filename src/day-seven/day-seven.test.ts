@@ -15,7 +15,7 @@ describe('day-7', () => {
     expect(result).toBe(6440)
   })
 
-  test('test input part two', async () => {
+  test.only('test input part two', async () => {
     const file = await readLines(
       '/Users/mastro/code/advent-of-code/src/day-seven/test-input.txt',
     )
