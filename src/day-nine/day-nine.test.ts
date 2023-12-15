@@ -22,6 +22,7 @@ describe('day-9', () => {
     const fileArray = (await file) as Array<string>
 
     const result = solve(fileArray)
-    console.log('Day 9:',result)
+    expect(result.part1).toBe(2005352194)
+    expect(result.part2).toBe(1077)
   })
 })

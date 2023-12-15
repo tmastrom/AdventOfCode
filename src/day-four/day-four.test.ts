@@ -16,7 +16,7 @@ describe('day-four', () => {
     const result = await partOne(
       '/Users/mastro/code/advent-of-code/src/day-four/input.txt',
     )
-    console.log('Day 4', result)
+    expect(result).toBe(18653)
   })
 
   test('part-two test input', async () => {
@@ -32,11 +32,11 @@ describe('day-four', () => {
     expect(ans).toBe(30)
   })
 
-  //   test.only('run part-two', async () => {
-  //     const result = await partTwo(
-  //       '/Users/mastro/code/advent-of-code/src/day-four/input.txt',
-  //     )
-  //     const ans = sumArray(result)
-  //     console.log(ans)
-  //   })
+  test('run part-two', async () => {
+    const result = await partTwo(
+      '/Users/mastro/code/advent-of-code/src/day-four/input.txt',
+    )
+    const ans = sumArray(result)
+    expect(ans).toBe(4527076)
+  })
 })

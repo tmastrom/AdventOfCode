@@ -1,10 +1,11 @@
 import { describe, expect, test } from 'vitest'
 
 import { readLines } from '../utils/readlines'
+import { lcm } from '../utils/utility'
 import { solve } from './day-eight'
 
 describe('day-8', () => {
-  test.skip('test input part one', async () => {
+  test('test input part one', async () => {
     const file = await readLines(
       '/Users/mastro/code/advent-of-code/src/day-eight/test-input.txt',
     )
@@ -13,7 +14,7 @@ describe('day-8', () => {
     expect(result).toBe(6)
   })
 
-  test.skip('part one', async () => {
+  test('part one', async () => {
     const file = await readLines(
       '/Users/mastro/code/advent-of-code/src/day-eight/input.txt',
     )
@@ -39,9 +40,6 @@ describe('day-8', () => {
     const file = await readLines(
       '/Users/mastro/code/advent-of-code/src/day-eight/input.txt',
     )
-
-    // [ 'AAA', 'BFA', 'VGA', 'DXA', 'VJA', 'BPA' ]
-    const res = [11567, 21251, 12643, 16409, 19099, 14257]
     const fileArray = (await file) as Array<string>
     // console.log(solve(fileArray, 'AAA')) // 11567
     // console.log(solve(fileArray, 'BFA')) // 21251
@@ -50,15 +48,8 @@ describe('day-8', () => {
     // console.log(solve(fileArray, 'VJA')) // 19099
     // console.log(solve(fileArray, 'BPA')) // 14257
 
-    const lcm = (...arr) => {
-      const gcd = (x, y) => (!y ? x : gcd(y, x % y));
-      const _lcm = (x, y) => (x * y) / gcd(x, y);
-      return [...arr].reduce((a, b) => _lcm(a, b));
-    };
-    console.log(lcm(...res)) // 9858474970153
-
+    // [ 'AAA', 'BFA', 'VGA', 'DXA', 'VJA', 'BPA' ]
+    const res = [11567, 21251, 12643, 16409, 19099, 14257]
     expect(lcm(...res)).toBe(9858474970153)
-    // const result = 2*3
-    // expect(result).toBe(6)
   })
 })

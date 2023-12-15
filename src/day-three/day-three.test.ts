@@ -14,6 +14,6 @@ describe('day-three', () => {
     const result = await partOne(
       '/Users/mastro/code/advent-of-code/src/day-three/input.txt',
     )
-    console.log('Day 3', result)
+    expect(result).toBe(507214)
   })
 })

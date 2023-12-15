@@ -15,7 +15,7 @@ describe('day-7', () => {
     expect(result).toBe(6440)
   })
 
-  test.only('test input part two', async () => {
+  test('test input part two', async () => {
     const file = await readLines(
       '/Users/mastro/code/advent-of-code/src/day-seven/test-input.txt',
     )
@@ -31,13 +31,15 @@ describe('day-7', () => {
     )
     const fileArray = (await file) as Array<string>
     const result = solve(fileArray)
+    expect(result).toBe(250370104)
   })
 
-  test.only('run day seven part two', async () => {
+  test('run day seven part two', async () => {
     const file = await readLines(
       '/Users/mastro/code/advent-of-code/src/day-seven/input.txt',
     )
     const fileArray = (await file) as Array<string>
     const result = solve2(fileArray)
+    expect(result).toBe(251735672)
   })
 })

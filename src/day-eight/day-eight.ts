@@ -1,10 +1,6 @@
 // --- Day 8: Haunted Wasteland ---
 import { isCharNumber } from '../utils/utility'
 
-// start at AAA until you hit ZZZ
-// repeat the whole sequence of instructions as necessary
-const end = 'ZZZ'
-
 function isAlpha(c: string) {
   return c >= 'A' && c <= 'Z'
 }
@@ -18,6 +14,8 @@ const mapLR = {
   R: 1,
 }
 
+// start at AAA until you hit ZZZ
+// repeat the whole sequence of instructions as necessary
 export function solve(lines: string[], startNode: string = 'AAA') {
   const lr = lines.shift()?.split('') || []
   // console.log('instructions', lr)
@@ -42,13 +40,14 @@ export function solve(lines: string[], startNode: string = 'AAA') {
     return acc
   }, [])
 
-
   // console.log(Object.keys(nodes).filter((k) => k.endsWith('A')))
   let i = 0
   let currentNode = startNode
 
   while (currentNode?.split('')[currentNode.length - 1] !== 'Z') {
-    currentNode = Object.values(nodes[currentNode])[mapLR[lr[i % lr.length]]] as string
+    currentNode = Object.values(nodes[currentNode])[
+      mapLR[lr[i % lr.length]]
+    ] as string
     // console.log('last char',currentNode?.split('')[currentNode.length - 1])
     i++
   }
