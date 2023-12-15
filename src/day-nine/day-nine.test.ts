@@ -22,6 +22,6 @@ describe('day-9', () => {
     const fileArray = (await file) as Array<string>
 
     const result = solve(fileArray)
-    console.log(result)
+    console.log('Day 9:',result)
   })
 })

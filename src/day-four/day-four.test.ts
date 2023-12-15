@@ -16,7 +16,7 @@ describe('day-four', () => {
     const result = await partOne(
       '/Users/mastro/code/advent-of-code/src/day-four/input.txt',
     )
-    console.log('result', result)
+    console.log('Day 4', result)
   })
 
   test('part-two test input', async () => {

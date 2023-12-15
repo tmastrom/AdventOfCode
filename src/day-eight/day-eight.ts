@@ -1,4 +1,5 @@
 // --- Day 8: Haunted Wasteland ---
+import { isCharNumber } from '../utils/utility'
 
 // start at AAA until you hit ZZZ
 // repeat the whole sequence of instructions as necessary
@@ -8,47 +9,49 @@ function isAlpha(c: string) {
   return c >= 'A' && c <= 'Z'
 }
 
+function isAlphaNumeric(c: string) {
+  return isAlpha(c) || isCharNumber(c)
+}
+
 const mapLR = {
   L: 0,
   R: 1,
 }
 
-export function solve(lines: string[]) {
+export function solve(lines: string[], startNode: string = 'AAA') {
   const lr = lines.shift()?.split('') || []
   // console.log('instructions', lr)
   lines.shift()
 
-  const nodes = lines.reduce((acc, cur, i) => {
+  const nodes: Array<Record<string, any>> = lines.reduce((acc, cur, i) => {
     const [key, value] = cur.split(' = ')
 
     const val = {
       L: value
         .split(' ')[0]
         .split('')
-        .filter((c) => isAlpha(c))
+        .filter((c) => isAlphaNumeric(c))
         .join(''),
       R: value
         .split(' ')[1]
         .split('')
-        .filter((c) => isAlpha(c))
+        .filter((c) => isAlphaNumeric(c))
         .join(''),
     }
-
     acc[key] = val
     return acc
   }, [])
 
-  // console.log(nodes)
 
+  // console.log(Object.keys(nodes).filter((k) => k.endsWith('A')))
   let i = 0
-  let currentNode = 'AAA'
-  // console.log(`node: ${currentNode}=`, nodes[currentNode])
-  while (currentNode !== end) {
-    // console.log(`${i}: ${lr[i % lr.length]}`)
+  let currentNode = startNode
+
+  while (currentNode?.split('')[currentNode.length - 1] !== 'Z') {
     currentNode = Object.values(nodes[currentNode])[mapLR[lr[i % lr.length]]] as string
-    // console.log(`node: ${currentNode}=`, nodes[currentNode])
+    // console.log('last char',currentNode?.split('')[currentNode.length - 1])
     i++
   }
-  // console.log(i)
+
   return i
 }
