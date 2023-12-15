@@ -42,7 +42,6 @@ export function solve(lines: string[]) {
     return { hand, handType: handType, bid: parseInt(bid, 10) }
   })
   typedHands.sort(compare)
-  console.log(typedHands)
 
   const winnings = typedHands.map((hand, index) => hand.bid * (index + 1))
   return sumArray(winnings)

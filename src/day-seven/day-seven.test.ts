@@ -31,7 +31,6 @@ describe('day-7', () => {
     )
     const fileArray = (await file) as Array<string>
     const result = solve(fileArray)
-    console.log(result)
   })
 
   test.only('run day seven part two', async () => {
@@ -40,6 +39,5 @@ describe('day-7', () => {
     )
     const fileArray = (await file) as Array<string>
     const result = solve2(fileArray)
-    console.log(result)
   })
 })
